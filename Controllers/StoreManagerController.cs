@@ -85,8 +85,10 @@ namespace MvcMusicStore.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumId,GenreId,ArtistId,Title,Price,AlbumArtUrl")] Album album)
+        public ActionResult Edit()
         {
+            var album = new Album();
+            TryUpdateModel(album, new[] { "AlbumId", "GenreId", "ArtistId", "Title", "Price", "AlbumArtUrl" });
             if (ModelState.IsValid)
             {
                 db.Entry(album).State = EntityState.Modified;
